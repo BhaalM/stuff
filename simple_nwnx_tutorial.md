@@ -37,19 +37,21 @@ void NWNX_Creature_SetCorpseDecayTime(object creature, int nDecayTime);
 ```
 "creature" is the creature we want to change its decay time, and nDecayTime is the new time we wan to set: it's an int because in the structure of the game it is stored as an int. But time in what? seconds? minutes? In the Toolset you can see that the Decay Time of a creature is defined in seconds, so maybe it is stored in seconds... but it seems odd to use an int32 to store a time in seconds. We'll have to test it, and if you do you'll see this int represent the time in milliseconds.
 
-This NWN Script function will call the NWNXEE function using "NWNX_CallFunction" defined in the nwnx.h header. The input and ouput arguments are passed between nwnscript and nwnxee using "stacks":
+This NWN Script function will call the NWNXEE function using "NWNX_CallFunction" defined in the nwnx.h header. The input and ouput arguments between nwnscript and nwnxee are passed using "stacks", we just have to push things on the stack and they will be available to the NWNXEE function:
 
 ```C
+const string NWNX_Creature = "NWNX_Creature"; //The plugin where the function is
+
 void NWNX_Creature_SetCorpseDecayTime(object creature, int nDecayTime)
 {
-    string sFunc = "SetCorpseDecayTime";
-    NWNX_PushArgumentInt(NWNX_Creature, sFunc, nDecayTime);
-    NWNX_PushArgumentObject(NWNX_Creature, sFunc, creature);
+    string sFunc = "SetCorpseDecayTime";                     // The NWNXEE function we want to call
+    NWNX_PushArgumentInt(NWNX_Creature, sFunc, nDecayTime);  // Push into the stack the decay time
+    NWNX_PushArgumentObject(NWNX_Creature, sFunc, creature); // PUsh the creature object
 
-    NWNX_CallFunction(NWNX_Creature, sFunc);
+    NWNX_CallFunction(NWNX_Creature, sFunc); // Call the function
 }
 ```
-
+The order of the "pushes" are important: we'll have to do the "pops" in inverse order in the NWNXEE code.
 
 
 
