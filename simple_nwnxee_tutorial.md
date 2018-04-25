@@ -1,6 +1,6 @@
 # Objective 
 
-The objective of this tutorial is to learn how to add basic functionality to NWNXEE. In order to do that I'll show you how to implement the very simple SetCoprseDecayTime function. After that, the best way to progress is to learn from the code of other plugins. 
+The objective of this tutorial is to learn how to add basic functionality to NWNXEE. In order to do that I'll show you how to implement the very simple SetCorpseDecayTime function. After that, the best way to progress is to learn from the code of other plugins. 
 
 # API
 
