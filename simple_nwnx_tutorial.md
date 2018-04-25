@@ -108,7 +108,26 @@ ArgumentStack Creature::SetCorpseDecayTime(ArgumentStack&& args)
     return stack; //Always return a stack, even if empty
 }
 ``` 
-The Creatu
+The "creature()" function is already defined in the plugin (line 121 when I'm writting this tutorial, the comments are mine)
+
+```C
+CNWSCreature *Creature::creature(ArgumentStack& args)
+{
+    const auto creatureId = Services::Events::ExtractArgument<Types::ObjectID>(args); //Pop the creature ID 
+
+    //Check if OBJECT is valid. 
+    //(almost) All the NWN script constants like OBJECT_INVALID are defined in the NWNXLib/API/Constants.hpp file
+    if (creatureId == Constants::OBJECT_INVALID) 
+    {
+        // If it is not valid, send an error to the LOG
+        LOG_NOTICE("NWNX_Creature function called on OBJECT_INVALID"); 
+        return nullptr;
+    }
+    
+    // return the Creature object from the object ID
+    return Globals::AppManager()->m_pServerExoApp->GetCreatureByGameObjectID(creatureId);
+}
+```
 
 
 
