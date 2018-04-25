@@ -55,7 +55,8 @@ The order of the "pushes" are important: we'll have to do the "pops" in inverse 
 
 # NWNXEE code
 
-Now we have to add the function the NWNXEE creature plugin. Firstly, we'll add the "SetCorpseDecayTime" definition to the Creature.hpp header. Remember the input and output arguments are stacks:
+## Creature.hpp
+Now we have to add the function the NWNXEE creature plugin. Firstly, we'll add the "SetCorpseDecayTime" declaration to the Creature.hpp header, we will add it at the end of all the declarations. As I said earlier, you can see that the input and output arguments are stacks:
 
 ```C
     ArgumentStack SetGold                       (ArgumentStack&& args);
@@ -64,9 +65,30 @@ Now we have to add the function the NWNXEE creature plugin. Firstly, we'll add t
     NWNXLib::API::CNWSCreature *creature(ArgumentStack& args);
 ```
 
-At the begining of the file you can see this line:
+At the begining of the file you can see that ArgumentStack is in fact NWNXLib::Services::Events::ArgumentStack:
+
 ```C
 using ArgumentStack = NWNXLib::Services::Events::ArgumentStack;
 ```
+
+## Creature.cpp
+
+In the CPP file we'll have to add the definition of the function, but also we'll have to register the funcion in the NWNXEE Core so it'll know this function exists.
+
+Let's starts with the registration which is done in the constructor of the plugin:
+
+```C
+reature::Creature(const Plugin::CreateParams& params)
+    : Plugin(params)
+{
+#define REGISTER(func) \
+//...
+//We have to register our function here adding the following line:
+REGISTER(SetCorpseDecayTime); 
+//..
+#undef REGISTER
+}
+```
+
 
 
