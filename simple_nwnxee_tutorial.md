@@ -48,12 +48,13 @@ void NWNX_Creature_SetCorpseDecayTime(object creature, int nDecayTime)
 {
     string sFunc = "SetCorpseDecayTime";                     // This will be the name of the NWNXEE function we want to call
     NWNX_PushArgumentInt(NWNX_Creature, sFunc, nDecayTime);  // Push into the stack the decay time
-    NWNX_PushArgumentObject(NWNX_Creature, sFunc, creature); // PUsh the creature object ID (no, this is not the object)
+    NWNX_PushArgumentObject(NWNX_Creature, sFunc, creature); // Push the creature object ID (no, this is not the object)
 
     NWNX_CallFunction(NWNX_Creature, sFunc); // Call the NWNXEE function
 }
 ```
-Note: The order of the "pushes" are important!! we'll have to do the "pops" in inverse order in the NWNXEE code.
+Note 1: The order of the "pushes" are important!! we'll have to do the "pops" in inverse order in the NWNXEE code.
+Note 2: The objects in NWN scripts are not the structures or classes we have seen before, they are identifiers (ObjectIds) that can be used to get the full memory structure in NWNXEE.
 
 # NWNXEE code
 
