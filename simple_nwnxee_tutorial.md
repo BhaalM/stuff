@@ -8,9 +8,9 @@ The API (the definition of the clases, structures, fucntions... that the game us
 
 In order to implement the SetCorpseDecayTime function the first thing we need to know is how this time is stored in the API. At the beginning it can be hard to search something in this big bunch of files... but after a while you'll see their names are more than enough to know where to look. 
 
-Since we are interested in a creature property we should start looking at files with "creature" in its name: the basic creature properties are defined in the file "CNWSCreature.hpp", its stats are defined in "CNWSCreatureStats.hpp", its appearance in CNWSCreatureAppearanceInfo.hpp... 
+Since we are interested in a creature property we should start looking at files with "creature" in its name: the basic creature properties are defined in the file "CNWSCreature.hpp", their stats are defined in "CNWSCreatureStats.hpp", its appearance in CNWSCreatureAppearanceInfo.hpp... 
 
-In our case, the CNWSCreature.hpp header defines the CNWSCreature structure, based on the more general CNWSObject. Basically all the creatures we encounter in a game are defined with this structure. If you look at the begining of its definition you'll see a field named "m_nDecayTime":
+In our case, the CNWSCreature.hpp header defines the CNWSCreature structure, based on the more general CNWSObject. Basically all the creatures we encounter in the game are defined with this structure. If you look at the begining of its definition you'll see a field named "m_nDecayTime":
 
 ```C
 struct CNWSCreature
