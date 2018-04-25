@@ -59,8 +59,10 @@ Note 2: The objects in NWN scripts are not the structures or classes we have see
 
 # NWNXEE code
 
+Now we have to add the function to the NWNXEE creature plugin.
+
 ## Creature.hpp
-Now we have to add the function the NWNXEE creature plugin. Firstly, we'll add the "SetCorpseDecayTime" declaration to the Creature.hpp header, for example at the end of all the other declarations. As I said earlier, you can see that the input and output arguments are stacks:
+Firstly, we'll add the "SetCorpseDecayTime" declaration to the Creature.hpp header, for example at the end of all the other declarations. As I said earlier, you can see that the input and output arguments are stacks:
 
 ```C
     .....
