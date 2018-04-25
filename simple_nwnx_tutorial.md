@@ -28,7 +28,7 @@ struct CNWSCreature
  ```
 How do we know this is the correct place? well, we really don't know for sure because we don't have access to the full code of the game, we'll need to test it, but the name of the variable seems promising.
 
-# Inerface between NWSCRIPT and NWNXEE
+# NWN Script and interface with NWNXEE
 
 Form the NWNScript point of view we'll have a function like this one:
 
@@ -44,7 +44,7 @@ const string NWNX_Creature = "NWNX_Creature"; //The plugin where the function is
 
 void NWNX_Creature_SetCorpseDecayTime(object creature, int nDecayTime)
 {
-    string sFunc = "SetCorpseDecayTime";                     // The NWNXEE function we want to call
+    string sFunc = "SetCorpseDecayTime";                     // This will be the name of the NWNXEE function we want to call
     NWNX_PushArgumentInt(NWNX_Creature, sFunc, nDecayTime);  // Push into the stack the decay time
     NWNX_PushArgumentObject(NWNX_Creature, sFunc, creature); // PUsh the creature object
 
@@ -53,7 +53,20 @@ void NWNX_Creature_SetCorpseDecayTime(object creature, int nDecayTime)
 ```
 The order of the "pushes" are important: we'll have to do the "pops" in inverse order in the NWNXEE code.
 
+# NWNXEE code
 
+Now we have to add the function the NWNXEE creature plugin. Firstly, we'll add the "SetCorpseDecayTime" definition to the Creature.hpp header. Remember the input and output arguments are stacks:
 
+```C
+    ArgumentStack SetGold                       (ArgumentStack&& args);
+    ArgumentStack SetCorpseDecayTime            (ArgumentStack&& args); <---- Here
+    
+    NWNXLib::API::CNWSCreature *creature(ArgumentStack& args);
+```
+
+At the begining of the file you can see this line:
+```C
+using ArgumentStack = NWNXLib::Services::Events::ArgumentStack;
+```
 
 
