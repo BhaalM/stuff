@@ -97,14 +97,18 @@ And finally, let see the definition of our function:
 ```C
 ArgumentStack Creature::SetCorpseDecayTime(ArgumentStack&& args)
 {
-    ArgumentStack stack;
-    if (auto *pCreature = creature(args))
+    ArgumentStack stack; // the returned stack (output arguments) recquired even if we return nothing
+    if (auto *pCreature = creature(args)) // Pop the creature from the stack using function creature (see note below)
     {
-        const auto nDecayTime = Services::Events::ExtractArgument<int32_t>(args); ASSERT(nDecayTime >= 0);
+        // Pop from the stack the second argument, the time
+        const auto nDecayTime = Services::Events::ExtractArgument<int32_t>(args); ASSERT(nDecayTime >= 0); 
+        // Change our creature structure
         pCreature->m_nDecayTime = nDecayTime;
     }
-    return stack;
+    return stack; //Always return a stack, even if empty
 }
 ``` 
+The Creatu
+
 
 
