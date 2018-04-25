@@ -46,7 +46,7 @@ void NWNX_Creature_SetCorpseDecayTime(object creature, int nDecayTime)
 {
     string sFunc = "SetCorpseDecayTime";                     // This will be the name of the NWNXEE function we want to call
     NWNX_PushArgumentInt(NWNX_Creature, sFunc, nDecayTime);  // Push into the stack the decay time
-    NWNX_PushArgumentObject(NWNX_Creature, sFunc, creature); // PUsh the creature object
+    NWNX_PushArgumentObject(NWNX_Creature, sFunc, creature); // PUsh the creature object ID (no, this is not the object)
 
     NWNX_CallFunction(NWNX_Creature, sFunc); // Call the function
 }
@@ -116,7 +116,7 @@ CNWSCreature *Creature::creature(ArgumentStack& args)
     const auto creatureId = Services::Events::ExtractArgument<Types::ObjectID>(args); //Pop the creature ID 
 
     //Check if OBJECT is valid. 
-    //(almost) All the NWN script constants like OBJECT_INVALID are defined in the NWNXLib/API/Constants.hpp file
+    //All the NWN script constants like OBJECT_INVALID are defined in the NWNXLib/API/Constants.hpp file
     if (creatureId == Constants::OBJECT_INVALID) 
     {
         // If it is not valid, send an error to the LOG
