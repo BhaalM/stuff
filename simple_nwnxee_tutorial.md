@@ -112,7 +112,7 @@ And finally, let see the definition of our function:
 ArgumentStack Creature::SetCorpseDecayTime(ArgumentStack&& args)
 {
     ArgumentStack stack;                  // The returned stack (output arguments) recquired even if we return nothing
-    if (auto *pCreature = creature(args)) // "Pop" the creature from the stack using function creature (see note below)
+    if (auto *pCreature = creature(args)) // "Pop" the creature from the stack using "creature" function (see text below)
     {
         // Pop from the stack the second argument: the time (note the order of the two "pops")
         const auto nDecayTime = Services::Events::ExtractArgument<int32_t>(args); 
