@@ -4,7 +4,7 @@ The objective of this tutorial is to learn how to add basic functionality to NWN
 
 # API
 
-The API (the definition of the clases, structures, fucntions... that the game uses internally) is located in the directory NWNXLib/API/Linux/API (I'll focus on the Linux API only)
+The API (the definition of the clases, structures, functions... that the game uses internally) is located in the directory NWNXLib/API/Linux/API (I'll focus on the Linux API only)
 
 In order to implement the SetCorpseDecayTime function the first thing we need to know is how this time is stored in the API. At the beginning it can be hard to search something in this big bunch of files... but after a while you'll see their names are more than enough to know where to look. 
 
