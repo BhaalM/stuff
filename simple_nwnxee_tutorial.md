@@ -10,7 +10,7 @@ In order to implement the SetCorpseDecayTime function the first thing we need to
 
 Since we are interested in a creature property we should start looking at files with "creature" in its name: the basic creature properties are defined in the file "CNWSCreature.hpp", its stats are defined in "CNWSCreatureStats.hpp", its appearance in CNWSCreatureAppearanceInfo.hpp... 
 
-In our case, the CNWSCreature.hpp header defines the CNWSCreature structure, based on the more general CNWSObject. Basically all the creatures we encounter in a game are defined with this structure. If you look at the beggining of its definition you'll see a field named "m_nDecayTime":
+In our case, the CNWSCreature.hpp header defines the CNWSCreature structure, based on the more general CNWSObject. Basically all the creatures we encounter in a game are defined with this structure. If you look at the begining of its definition you'll see a field named "m_nDecayTime":
 
 ```C
 struct CNWSCreature
@@ -37,7 +37,7 @@ Form the NWNScript point of view we'll have a function like this one:
 ```C
 void NWNX_Creature_SetCorpseDecayTime(object creature, int nDecayTime);
 ```
-"creature" is the creature we want to change its decay time, and nDecayTime is the new time we wan to set: it's an int because in the structure of the game it is stored as an int. But time in what? seconds? minutes? In the Toolset you can see that the Decay Time of a creature is defined in seconds, so maybe it is stored in seconds... but it seems odd to use an int32 to store a time in seconds. We'll have to test it, and if you do you'll see this int is not in second but in milliseconds.
+"creature" is the creature we want to change its decay time, and nDecayTime is the new time we want to set: it's an int because in the structure of the game it is stored as an int. But time in what? seconds? minutes? In the Toolset you can see that the Decay Time of a creature is defined in seconds, so maybe it is stored in seconds... but it seems odd to use an int32 to store a time in seconds. We'll have to test it, and if you do you'll see this int is not in second but in milliseconds.
 
 This NWN Script function will call the NWNXEE function using "NWNX_CallFunction" defined in the nwnx.h header. The input and ouput arguments between nwnscript and nwnxee are passed using "stacks", we just have to push things onto the stack and they will be available to the NWNXEE function:
 
