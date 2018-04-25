@@ -54,6 +54,7 @@ void NWNX_Creature_SetCorpseDecayTime(object creature, int nDecayTime)
 }
 ```
 Note 1: The order of the "pushes" are important!! we'll have to do the "pops" in inverse order in the NWNXEE code.
+
 Note 2: The objects in NWN scripts are not the structures or classes we have seen before, they are identifiers (ObjectIds) that can be used to get the full memory structure in NWNXEE.
 
 # NWNXEE code
