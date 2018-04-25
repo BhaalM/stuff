@@ -29,3 +29,29 @@ struct CNWSCreature
 How do we know this is the correct place? well, we really don't know for sure because we don't have access to the full code of the game, we'll need to test it, but the name of the variable seems promising.
 
 # Inerface between NWSCRIPT and NWNXEE
+
+Form the NWNScript point of view we'll have a function like this one:
+
+```C
+void NWNX_Creature_SetCorpseDecayTime(object creature, int nDecayTime);
+```
+"creature" is the creature we want to change its decay time, and nDecayTime is the new time we wan to set: it's an int because in the structure of the game it is stored as an int. But time in what? seconds? minutes? In the Toolset you can see that the Decay Time of a creature is defined in seconds, so maybe it is stored in seconds... but it seems odd to use an int32 to store a time in seconds. We'll have to test it, and if you do you'll see this int represent the time in milliseconds.
+
+This NWN Script function will call the NWNXEE function using "NWNX_CallFunction" defined in the nwnx.h header. The input and ouput arguments are passed between nwnscript and nwnxee using "stacks":
+
+```C
+void NWNX_Creature_SetCorpseDecayTime(object creature, int nDecayTime)
+{
+    string sFunc = "SetCorpseDecayTime";
+    NWNX_PushArgumentInt(NWNX_Creature, sFunc, nDecayTime);
+    NWNX_PushArgumentObject(NWNX_Creature, sFunc, creature);
+
+    NWNX_CallFunction(NWNX_Creature, sFunc);
+}
+```
+
+
+
+
+
+
