@@ -73,7 +73,10 @@ using ArgumentStack = NWNXLib::Services::Events::ArgumentStack;
 
 ## Creature.cpp
 
-In the CPP file we'll have to add the definition of the function, but also we'll have to register the funcion in the NWNXEE Core so it'll know this function exists.
+In the CPP file we have to: 
+
+1. Add the definition of the function, 
+2. but also we have to "register" the funcion in the NWNXEE Core so it'll know this function exists.
 
 Let's starts with the registration which is done in the constructor of the plugin:
 
@@ -89,6 +92,19 @@ REGISTER(SetCorpseDecayTime);
 #undef REGISTER
 }
 ```
+And finally, let see the definition of our function:
 
+```C
+ArgumentStack Creature::SetCorpseDecayTime(ArgumentStack&& args)
+{
+    ArgumentStack stack;
+    if (auto *pCreature = creature(args))
+    {
+        const auto nDecayTime = Services::Events::ExtractArgument<int32_t>(args); ASSERT(nDecayTime >= 0);
+        pCreature->m_nDecayTime = nDecayTime;
+    }
+    return stack;
+}
+``` 
 
 
