@@ -73,7 +73,7 @@ At the begining of the header file you can see that ArgumentStack is in fact NWN
 ```C
 using ArgumentStack = NWNXLib::Services::Events::ArgumentStack;
 ```
-If you look at the code of other plungins you will surely find (Depending on the author, the time of the coding...) delarations like:
+If you look at the code of other plungins you will surely find (Depending on the author, the time of the coding...) declarations like:
 
 ```C
 NWNXLib::Services::Events::ArgumentStack SetCorpseDecayTime( NWNXLib::Services::Events::ArgumentStack&& args); 
