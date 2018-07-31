@@ -1,5 +1,5 @@
 // Recquired includes: mali_string_fns.nss from Malishara DM Stage Wand and nwnx_object.nss
-// Read placeables information from item description and create them in the area
+// Read placeables information from item description and create them in the area: this script is the ON ACTIVATE event script
 // g_invis_obj is the resref of a non static object you have to create on the module (the base building block)
 
 
