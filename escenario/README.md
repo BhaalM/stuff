@@ -1,6 +1,6 @@
 Recquirements: nwnx_object and Malishara DM Stage Wand
 
-With this you can import stages on your online server (very limited: no names, no descriptions, no scripts...absolute positions) so its better import the placeables in a special area and store them with the DM Stage Wand for future use.
+With this you can import stages on your online server (very limited: no names, no descriptions, no scripts...absolute positions) so its better to import the placeables in a special area of your server and after that store them with the DM Stage Wand for future use.
 
 I'll suppose you have tag based script enabled in your module:
 
