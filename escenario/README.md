@@ -7,7 +7,7 @@ I'll suppose you have tag based script enabled in your module:
 1. Create a new module, with all the haks of your server, with an area with tag dm_explanada (a flat one)
 2. Create an item with tag it_g_escenario, identified, with the property Unique Power Self Only, unlimitted use
 3. Drop this item in the middle of the area 
-4. Create the it_g_escenario.nss on your server module
+4. Create and copy the it_g_escenario.nss on your server module
 5. Get a copy of gffmatch.exe from http://www.kivinen.iki.fi/nwn/downloads.html
 6. Create a folder "util" on your "My Documents/Neverwinter Nights" directory
 7. Copy gffmatch.exe and the file escenario.bat to the util directory
