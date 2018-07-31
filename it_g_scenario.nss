@@ -1,3 +1,8 @@
+// Recquired includes: mali_string_fns.nss from Malishara DM Stage Wand and nwnx_object.nss
+// Read placeables information from item description and create them in the area
+// g_invis_obj is the resref of a non static object you have to create on the module (the base building block)
+
+
 #include "mali_string_fns"
 #include "x2_inc_switches"
 #include "nwnx_object"
