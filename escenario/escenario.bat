@@ -1,0 +1,1 @@
+gffmatch.exe --proc "csv" --include Placeable -s "^/Placeable List\[\d+\]/$" -f "/Appearance:!:^0$" -p "Appearance,Bearing,Plot,Tag,TemplateResRef,Useable,X,Y,Z" ..\modules\temp0\dm_explanada.git > escenario.txt
