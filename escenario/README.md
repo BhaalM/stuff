@@ -17,7 +17,7 @@ I'll suppose you have tag based script enabled in your module:
 11. Open the file excenario.txt and select then copy the whole content of the file
 12. Paste it on the identified description of the item it_g_escenario on the floor of your new module
 13. Load the module and grab the item with your DM avatar
-14. Go to your server and use the object "in an area big enough" the placeable will be created: the placeables are created at the same absolute positions of your newly created module, so depending on the dimenssioos of the servre area maybe you'll hace to look for them.
+14. Go to your server and use the object "in an area big enough" the placeable will be created: the placeables are created at the same absolute positions of your newly created module, so depending on the dimenssions of the server area maybe you'll hace to look for them.
 15. Now you can use the Malishara DM stage wand to save the objects in a Stage Wand and use them where you want
 
 
