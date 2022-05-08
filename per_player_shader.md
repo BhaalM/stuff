@@ -3,6 +3,12 @@
 
 The objective of this short tutorial is to show how to activate shaders for a particular player, allowing to change how they see the world without affecting the rest of players.
 
+# Disclaimer
+
+I've extracted part of the code from the mess I have in my shader files, so you'll surely find errors. I will appreciate any feedback on those errors in order to improve this tutorial.
+
+And of course, do wathever you want with the code. 
+
 # Requirements
 
 The latest version of [NWNX](https://github.com/nwnxee/unified). We'll use the following functions: `NWNX_Player_UpdateWind()` and `NWNX_Area_GetWindPower()`
