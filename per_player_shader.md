@@ -26,7 +26,7 @@ This tutorial supposes you are not using the `SetAreaWind` function of the base 
 void SetAreaWind(object oArea, vector vDirection, float fMagnitude, float fYaw, float fPitch);
 ```
 
-That is, the wind in your module area is set by the toolset and not by any script. If this is not your case you'll have to change the code of this tutorial and adapt it to your needs.
+That is, the wind in your module areas is set by the toolset and not by any script. If this is not your case you'll have to change the code of this tutorial and adapt it to your needs.
 
 The code presented here does not allow the application of different shader effects at the same time (but you can easily change it to do so).
 
