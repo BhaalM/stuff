@@ -21,3 +21,9 @@ void SetAreaWind(object oArea, vector vDirection, float fMagnitude, float fYaw, 
 ```
 
 That is, the wind is set by the toolset and not by any script in your module. If this is not your case you'll have to change the code of this tutorial.
+
+# How it works
+
+The shaders have access to some _uniforms_ (see this [tutorial](https://nwn.wiki/display/NWN1/Shaders) for more info on shaders and uniforms) that are set by the game: the area flags, the world time, etc. And the one we will use in this tutorial _areaGlobalWind_ which contains the global wind vector for the area.
+
+¿Why this _uniform_? because I found this _uniform_ can be changed in a per player basis, so we can change the value of _areaGlobalWind_ for **only one player**. There are sureley other _uniforms_ that can be used but, as we will see, this one allows an easy way for the shader to detect we want to apply a specific effect without affecting, at least noticeably, the wind effects in the area.  
