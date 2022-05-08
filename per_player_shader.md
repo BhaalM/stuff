@@ -7,7 +7,7 @@ The objective of this short tutorial is to show how to activate shaders for a pa
 
 I've extracted part of the code from the mess I have in my shader files, so you'll surely find errors. I will appreciate any feedback on those errors in order to improve this tutorial.
 
-And of course, do wathever you want with the code. 
+And of course, do whatever you want with the code. 
 
 # Requirements
 
@@ -26,7 +26,7 @@ This tutorial supposes you are not using the `SetAreaWind` function of the base 
 void SetAreaWind(object oArea, vector vDirection, float fMagnitude, float fYaw, float fPitch);
 ```
 
-That is, the wind is set by the toolset and not by any script in your module. If this is not your case you'll have to change the code of this tutorial.
+That is, the wind is set by the toolset and not by any script in your module. If this is not your case you'll have to change the code of this tutorial and adapt it to your needs.
 
 # How it works
 
@@ -40,7 +40,7 @@ If you haven't changed the wind in any area of your module using the `SetAreaWin
 - `vDirection=(1.0, 1.0, 0.0), fMagnitude=1.0`: the squared modulus of the _areaGlobalWind_ vector will be 2
 - `vDirection=(1.0, 1.0, 0.0), fMagnitude=2.0`: the squared modulus of the _areaGlobalWind_ vector will be 8
 
-What we are going to do is to change slightly those numbers (slightly, in order to not have any noticeable/visible effect on the wind of the area). Since the modulus of _areaGlobalWind_ is a float, an easy way to do this is to add a fractional part to the squared modulus: the shader will check the fractional part and apply an effect depending on its value. For example if the fractional part is 0.01 we can remove the colors, if it's 0.02 we can inverse the colors to get an ethereal effect, etc.
+What we are going to do is to change slightly those numbers (slightly, in order to not have any noticeable/visible effect on the wind of the area). Since the modulus of _areaGlobalWind_ is a float, an easy way to do this is to add a fractional part to the squared modulus: the shader will check the fractional part and apply an effect depending on its value. For example if the fractional part is 0.01 we can remove the colors, if it's 0.02 we can inverse the colors to get an ethereal effect, etc. Note that a change of, let say, 0.08 in the squared modulus of the wind vector will not be noticeable for the player.
 
 # Shader code
 
