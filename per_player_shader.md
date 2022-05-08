@@ -120,12 +120,13 @@ Add the following code to an include file:
 ```C
 #include "nwnx_area"
 
-const float SM_WIND_SHADER_ULTRAVISION = 0.02;
+const float SM_WIND_SHADER_NONE        = 0.00;
 const float SM_WIND_SHADER_ETHEREAL    = 0.01;
+const float SM_WIND_SHADER_ULTRAVISION = 0.02;
 
-void SetWindShader(object oPlayer, float fWindShader=SM_WIND_SHADER_ULTRAVISION);
+void SetWindShader(object oPlayer, float fWindShader=SM_WIND_SHADER_NONE);
 
-void SetWindShader(object oPlayer, float fWindShader=SM_WIND_SHADER_ULTRAVISION)
+void SetWindShader(object oPlayer, float fWindShader=SM_WIND_SHADER_NONE)
 {
     object oArea = GetArea(oPlayer);
 
@@ -165,4 +166,11 @@ void SetWindShader(object oPlayer, float fWindShader=SM_WIND_SHADER_ULTRAVISION)
     NWNX_Area_UpdateWind(oPlayer, vDirection, fMagnitude, fYaw, fPitch);
 }
 ```
+So, if for example you want to change the darkvision spell, add the include to the `NW_S0_DarkVis.nss` file and call `SetWindShader(oTarget, SM_WIND_SHADER_ULTRAVISION)` when applying the spell effects.
 
+Note that:
+
+- You'll need a way to detect the end of the spell to restore the normal shader (call `SetWindShader(oPlayer, SM_WIND_SHADER_NONE)`)
+- Since the shader depends on the wind of an area, you'll need a way to re-apply the shader when the player moves to another area
+
+This can be done easily but it is out of the scope of this tutorial.
