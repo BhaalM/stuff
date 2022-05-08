@@ -28,6 +28,8 @@ void SetAreaWind(object oArea, vector vDirection, float fMagnitude, float fYaw, 
 
 That is, the wind is set by the toolset and not by any script in your module. If this is not your case you'll have to change the code of this tutorial and adapt it to your needs.
 
+The code presented here does not allow the application of different shader effects at the same time (but you can easily change it to do so).
+
 # How it works
 
 The shaders have access to some _uniforms_ (see this [tutorial](https://nwn.wiki/display/NWN1/Shaders) for more info on shaders and uniforms) that are set by the game: the area flags, the world time, ... and the one we will use in this tutorial _areaGlobalWind_ which contains the global wind vector for the area.
@@ -109,6 +111,58 @@ void main ()
     //====================================
     
     gl_FragColor = FragmentColor;
+}
+```
+# NWSCRIPT code
+
+Add the following code to an include file:
+
+```C
+#include "nwnx_area"
+
+const float SM_WIND_SHADER_ULTRAVISION = 0.02;
+const float SM_WIND_SHADER_ETHEREAL    = 0.01;
+
+void SetWindShader(object oPlayer, float fWindShader=SM_WIND_SHADER_ULTRAVISION);
+
+void SetWindShader(object oPlayer, float fWindShader=SM_WIND_SHADER_ULTRAVISION)
+{
+    object oArea = GetArea(oPlayer);
+
+    // I'm using the default game vector, a normalized vector (length 1) would be "easier", but I have not tested it
+    vector vDirection = Vector(1.0, 1.0, 0.0);
+
+    int nWindPower = NWNX_Area_GetWindPower(oArea);
+
+    float fYaw, fPitch;
+    switch(nWindPower)
+    {
+        case 0:
+            fYaw = 0.0;
+            fPitch = 0.0;
+            break;
+        case 1:
+            fYaw = 100.0;
+            fPitch = 3.0;
+            break;
+        case 2:
+            fYaw = 150.0;
+            fPitch = 5.0;
+            break;
+    }
+
+    // We will work with the squared modulus to avoid the use of sqrt() operation in the shader
+    float fSqModulus = IntToFloat(2*nWindPower*nWindPower);
+
+    //We want the shader to see fSqModulus + fWindShader
+    fSqModulus+=fWindShader;
+
+    // From the desired result, calculate the magnitude we will use for the NWNX_Player_UpdateWind function
+    float fMagnitude = fSqModulus/2.0; // 2.0 is the squared modulus of vDirection
+    fMagnitude = sqrt(fMagnitude);
+
+    // Apply it to the player
+    NWNX_Area_UpdateWind(oPlayer, vDirection, fMagnitude, fYaw, fPitch);
 }
 ```
 
