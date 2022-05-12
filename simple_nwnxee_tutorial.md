@@ -74,9 +74,11 @@ So, in order to add our `SetCorpseDecayTime` the code we can add:
 ```C
 NWNX_EXPORT ArgumentStack SetCorpseDecayTime(ArgumentStack&& args)
 {
-    if (auto *pCreature = Utils::PopCreature(args)) // "Pop" the creature from the stack, if null do not enter the if (See note below)
+    // "Pop" the creature from the stack, if null do not enter the if (See note below)
+    if (auto *pCreature = Utils::PopCreature(args))    
     {
-        const auto nDecayTime = args.extract<int32_t>(); // Pop from the stack the second argument: the time (note the order of the two "pops")
+        // Pop from the stack the second argument: the time (note the order of the two "pops")
+        const auto nDecayTime = args.extract<int32_t>();  
           ASSERT_OR_THROW(nDecayTime >= 0); // Just for security: time can't be negative
         pCreature->m_nDecayTime = nDecayTime; // Change our creature structure
     }
