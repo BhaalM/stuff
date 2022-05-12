@@ -4,7 +4,7 @@ The objective of this tutorial is to learn how to add basic functionality to NWN
 
 # API
 
-The API (the definition of the clases, structures, functions... that the game uses internally) is located in the directory NWNXLib/API/Linux/API (I'll focus on the Linux API only)
+The API (the definition of the clases, structures, functions... that the game uses internally) is located in the directory NWNXLib/API/Linux/API.
 
 In order to implement the SetCorpseDecayTime function the first thing we need to know is how this time is stored in the API. At the beginning it can be hard to search something in this big bunch of files... but after a while you'll see their names are more than enough to know where to look. 
 
@@ -53,96 +53,36 @@ void NWNX_Creature_SetCorpseDecayTime(object creature, int nDecayTime)
     NWNX_CallFunction(NWNX_Creature, sFunc); // Call the NWNXEE function
 }
 ```
-Note 1: The order of the "pushes" are important!! we'll have to do the "pops" in inverse order in the NWNXEE code.
+Note 1: The order of the "pushes" are important!! we'll have to do the "pops" in inverse order in the NWNXEE code. The convention in NWNXEE plugins is that we push the arguments in inverse order in the nwnscript file, so the pop in the C++ code are done in the correct order.
 
 Note 2: The objects in NWN scripts are not the structures or classes we have seen before, they are identifiers (ObjectIDs) that can be used to get the full memory structure in NWNXEE.
 
 # NWNXEE code
 
-Now we have to add the function to the NWNXEE creature plugin.
+Now we have to add the function to the NWNXEE creature plugin. For our very simple function we only have to change one file in the creature plugin: Plugins/Creature/Creature.cpp.
 
-## Creature.hpp
-Firstly, we'll add the "SetCorpseDecayTime" declaration to the Creature.hpp header, for example at the end of all the other declarations. As I said earlier, you can see that the input and output arguments are stacks:
+If you open this file you'll see a lot of function declarations like for example:
 
 ```C
-    .....
-    ArgumentStack GetMovementType               (ArgumentStack&& args);
-    ArgumentStack SetWalkRateCap                (ArgumentStack&& args);
-    ArgumentStack SetGold                       (ArgumentStack&& args);
-    ArgumentStack SetCorpseDecayTime            (ArgumentStack&& args); //<---- Here
+NWNX_EXPORT ArgumentStack AddFeat(ArgumentStack&& args)
 ```
 
-At the begining of the header file you can see that ArgumentStack is in fact NWNXLib::Services::Events::ArgumentStack:
+These are the functions that can be accessed from nwnscript code through the `NWNX_CallFunction` we've seen before and, in this case, it corresponds to the `AddFeat` function of the creature plugin. The `ArgumentStack` is just the stack with all the pushed variables of the corresponding nwnscript function. 
+
+So, in order to add our `SetCorpseDecayTime` the code we can add:
 
 ```C
-using ArgumentStack = NWNXLib::Services::Events::ArgumentStack;
-```
-If you look at the code of other plungins you will surely find (Depending on the author, the time of the coding...) declarations like:
-
-```C
-NWNXLib::Services::Events::ArgumentStack SetCorpseDecayTime( NWNXLib::Services::Events::ArgumentStack&& args); 
-```
-Which is equivalent.
-
-## Creature.cpp
-
-In the CPP file we have to: 
-
-1. Add the definition of the function, 
-2. but also we have to "register" the funcion in the NWNXEE Core so it'll know this function exists.
-
-Let's starts with easy part, the registration, which is done in the constructor of the plugin:
-
-```C
-reature::Creature(const Plugin::CreateParams& params)
-    : Plugin(params)
+NWNX_EXPORT ArgumentStack SetCorpseDecayTime(ArgumentStack&& args)
 {
-#define REGISTER(func) \
-//...
-//We have to register our function here, adding the following line:
-//If we do not register the function, the NWNXEE core will throw an error if we try to use it
-REGISTER(SetCorpseDecayTime); 
-//..
-#undef REGISTER
-}
-```
-And finally, let see the definition of our function:
-
-```C
-ArgumentStack Creature::SetCorpseDecayTime(ArgumentStack&& args)
-{
-    ArgumentStack stack;                  // The returned stack (output arguments) recquired even if we return nothing
-    if (auto *pCreature = creature(args)) // "Pop" the creature from the stack using "creature" function (see text below)
+    if (auto *pCreature = Utils::PopCreature(args)) // "Pop" the creature from the stack, if null do not enter the if (See note below)
     {
-        // Pop from the stack the second argument: the time (note the order of the two "pops")
-        const auto nDecayTime = Services::Events::ExtractArgument<int32_t>(args); 
-        ASSERT(nDecayTime >= 0); // Just for security: time can't be negative
+        const auto nDecayTime = args.extract<int32_t>(); // Pop from the stack the second argument: the time (note the order of the two "pops")
+          ASSERT_OR_THROW(nDecayTime >= 0); // Just for security: time can't be negative
         pCreature->m_nDecayTime = nDecayTime; // Change our creature structure
     }
-    return stack; //Always return a stack, even if empty
-}
-``` 
-The "creature()" function is already defined in the plugin (line 121 when writting this tutorial, the comments are mine)
-
-```C
-CNWSCreature *Creature::creature(ArgumentStack& args)
-{
-    const auto creatureId = Services::Events::ExtractArgument<Types::ObjectID>(args); //Pop the creature ID 
-
-    //Check if OBJECT is valid. 
-    //All the NWN script constants like OBJECT_INVALID are defined in the NWNXLib/API/Constants.hpp file
-    if (creatureId == Constants::OBJECT_INVALID) 
-    {
-        // If it is not valid, send an error to the LOG
-        LOG_NOTICE("NWNX_Creature function called on OBJECT_INVALID"); 
-        return nullptr;
-    }
-    
-    // return the Creature object from the object ID
-    return Globals::AppManager()->m_pServerExoApp->GetCreatureByGameObjectID(creatureId);
+    return {}; // The returned stack (output arguments) recquired even if we return nothing
 }
 ```
+The `PopCreature` function is already defined int the file `Utils.cpp`. if you open that file you'll see it "pops" the object ID we pushed in the nwnscript function and returns a pointer to the CNWSCreature structure of our creature we want to modify.
 
 Now compile the plugin with the command Scripts/buildnwnx.sh, and that's all! :)
-
-
