@@ -46,9 +46,9 @@ const string NWNX_Creature = "NWNX_Creature"; //The plugin the function belongs 
 
 void NWNX_Creature_SetCorpseDecayTime(object creature, int nDecayTime)
 {
-    string sFunc = "SetCorpseDecayTime";                     // This will be the name of the NWNXEE function we want to call
-    NWNX_PushArgumentInt(NWNX_Creature, sFunc, nDecayTime);  // Push into the stack the decay time
-    NWNX_PushArgumentObject(NWNX_Creature, sFunc, creature); // Push the creature object ID (no, this is not the object)
+    string sFunc = "SetCorpseDecayTime"; // This is the name of the NWNXEE function we want to call (we'll create it later)
+    NWNX_PushArgumentInt(nDecayTime);    // Push into the stack the decay time
+    NWNX_PushArgumentObject(creature);   // Push the creature object ID (no, this is not the object)
 
     NWNX_CallFunction(NWNX_Creature, sFunc); // Call the NWNXEE function
 }
