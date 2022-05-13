@@ -1,4 +1,6 @@
-This is the code of a fragment postprocessing shader. That is, the code replace `fsfbpostpr.shd`. You can see this shader in action [here](https://www.youtube.com/watch?v=sLSG2CjMuFA) IMPORTANT: Configure the youtube player to 1080p or you'll see nothing.
+This is the code of a fragment postprocessing shader. That is, the code replace `fsfbpostpr.shd`. 
+
+You can see this shader in action [here](https://www.youtube.com/watch?v=sLSG2CjMuFA) IMPORTANT: Configure the youtube player to 1080p or you'll see nothing.
 
 ## Disclaimer
 
