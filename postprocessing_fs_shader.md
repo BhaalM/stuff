@@ -1,6 +1,8 @@
 This is the code of a fragment postprocessing shader. That is, the code replace `fsfbpostpr.shd`. 
 
-This shader has been adapated to nwnEE from the youtube tutorial "Underwater World Shaders" by Peer Play: https://www.youtube.com/watch?v=v15C8SbTTac&list=PL3POsQzaCw51Cvlnery3cIabH-YqQtMpa
+You can see this shader in action [here](https://www.youtube.com/watch?v=sLSG2CjMuFA) IMPORTANT: Configure the youtube player to 1080p or you'll see nothing.
+
+This shader has been adapated to nwnEE from the youtube tutorial "Underwater World Shaders" by Peer Play: [here](https://www.youtube.com/watch?v=v15C8SbTTac&list=PL3POsQzaCw51Cvlnery3cIabH-YqQtMpa)
 
 ```C
 #define SHADER_TYPE 2
@@ -34,4 +36,4 @@ void main()
 
 This shader use a noise function included in the nwnEE shader files (it's in the `inc_common.shd`): `NoiseSimplex3D()`. 
 
-See more about Perlin noise functions: https://www.youtube.com/watch?v=Qf4dIN99e2w&list=PLRqwX-V7Uu6bgPNQAdxQZpJuJCjeOr7VD
+See more about [Perlin noise functions](https://www.youtube.com/watch?v=Qf4dIN99e2w&list=PLRqwX-V7Uu6bgPNQAdxQZpJuJCjeOr7VD)
