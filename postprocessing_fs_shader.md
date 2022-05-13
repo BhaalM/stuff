@@ -2,7 +2,9 @@ This is the code of a fragment postprocessing shader. That is, the code replace 
 
 You can see this shader in action [here](https://www.youtube.com/watch?v=sLSG2CjMuFA) IMPORTANT: Configure the youtube player to 1080p or you'll see nothing.
 
-This shader has been adapated to nwnEE from the youtube tutorial "Underwater World Shaders" by Peer Play: [here](https://www.youtube.com/watch?v=v15C8SbTTac&list=PL3POsQzaCw51Cvlnery3cIabH-YqQtMpa)
+This shader has been adapated to nwnEE from the youtube tutorial [Underwater World Shaders](https://www.youtube.com/watch?v=v15C8SbTTac&list=PL3POsQzaCw51Cvlnery3cIabH-YqQtMpa) by Peer Play.
+
+You'll need to use a system like the one defined [here](https://nwn.wiki/display/NWN1/Shaders+and+Area+Flags) or [here](https://nwn.wiki/display/NWN1/Per+player+shaders) to use the shader only in certain areas. 
 
 ```C
 #define SHADER_TYPE 2
