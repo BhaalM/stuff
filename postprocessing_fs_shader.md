@@ -1,15 +1,12 @@
-This is the code of a fragment postprocessing shader. That is, the code replace `fsfbpostpr.shd`. 
+This is the code of a fragment postprocessing shader. That is, the code replace `fsfbpostpr.shd`. You can see this shader in action [here](https://www.youtube.com/watch?v=sLSG2CjMuFA) IMPORTANT: Configure the youtube player to 1080p or you'll see nothing.
 
-You can see this shader in action [here](https://www.youtube.com/watch?v=sLSG2CjMuFA) IMPORTANT: Configure the youtube player to 1080p or you'll see nothing.
+## Disclaimer
 
-This shader has been adapated to nwnEE from the youtube tutorial [Underwater World Shaders](https://www.youtube.com/watch?v=v15C8SbTTac&list=PL3POsQzaCw51Cvlnery3cIabH-YqQtMpa) by Peer Play.
+* This shader has been adapated to nwnEE from the youtube tutorial [Underwater World Shaders](https://www.youtube.com/watch?v=v15C8SbTTac&list=PL3POsQzaCw51Cvlnery3cIabH-YqQtMpa) by Peer Play.
+* You'll need to use a system like the one defined [here](https://nwn.wiki/display/NWN1/Shaders+and+Area+Flags) or [here](https://nwn.wiki/display/NWN1/Per+player+shaders) to use the shader only in certain areas. 
+* Do what you want with this code
 
-You'll need to use a system like the one defined [here](https://nwn.wiki/display/NWN1/Shaders+and+Area+Flags) or [here](https://nwn.wiki/display/NWN1/Per+player+shaders) to use the shader only in certain areas. 
-
-This shader use a noise function included in the nwnEE shader files (it's in the `inc_common.shd`): `NoiseSimplex3D()`. 
-
-See more about [Perlin noise functions](https://www.youtube.com/watch?v=Qf4dIN99e2w&list=PLRqwX-V7Uu6bgPNQAdxQZpJuJCjeOr7VD)
-
+## Shader code (fsfbpostpr.shd)
 ```C
 #define SHADER_TYPE 2
 
@@ -39,3 +36,5 @@ void main()
     gl_FragColor = Color;
 }
 ```
+## More info
+This shader use a noise function included in the nwnEE shader files (it's in the `inc_common.shd`): `NoiseSimplex3D()`. See more about [Perlin noise functions](https://www.youtube.com/watch?v=Qf4dIN99e2w&list=PLRqwX-V7Uu6bgPNQAdxQZpJuJCjeOr7VD)
