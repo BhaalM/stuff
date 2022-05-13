@@ -6,6 +6,10 @@ This shader has been adapated to nwnEE from the youtube tutorial [Underwater Wor
 
 You'll need to use a system like the one defined [here](https://nwn.wiki/display/NWN1/Shaders+and+Area+Flags) or [here](https://nwn.wiki/display/NWN1/Per+player+shaders) to use the shader only in certain areas. 
 
+This shader use a noise function included in the nwnEE shader files (it's in the `inc_common.shd`): `NoiseSimplex3D()`. 
+
+See more about [Perlin noise functions](https://www.youtube.com/watch?v=Qf4dIN99e2w&list=PLRqwX-V7Uu6bgPNQAdxQZpJuJCjeOr7VD)
+
 ```C
 #define SHADER_TYPE 2
 
@@ -35,7 +39,3 @@ void main()
     gl_FragColor = Color;
 }
 ```
-
-This shader use a noise function included in the nwnEE shader files (it's in the `inc_common.shd`): `NoiseSimplex3D()`. 
-
-See more about [Perlin noise functions](https://www.youtube.com/watch?v=Qf4dIN99e2w&list=PLRqwX-V7Uu6bgPNQAdxQZpJuJCjeOr7VD)
