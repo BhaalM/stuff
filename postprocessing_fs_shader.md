@@ -29,13 +29,13 @@ void main()
     vec4 Color = FS_PostProcess();
     
     //New shader begin here:
-    float SMtick = (worldtimerTimeOfDay/1000.0);
+    float SMtick = float(worldtimerTimeOfDay)/1000.0;
     vec3 spos;
     spos.xy = vVertexTexCoords.xy*SM_NOISE_UW_FREQUENCY;
     spos.z = SMtick*SM_NOISE_UW_SPEED;
-    float noise = SM_NOISE_UW_SCALE * ((NoiseSimplex3D(spos) +1)/2);
-    vec2 noiseToDirection = vec2(cos(2*PI*noise), sin(2*PI*noise));
-    vec2 coord = vVertexTexCoords+ SM_UW_PIXEL_OFFSET*noiseToDirection; 
+    float noise = SM_NOISE_UW_SCALE * ((NoiseSimplex3D(spos) + 1.0)/2.0);
+    vec2 noiseToDirection = vec2(cos(2.0*PI*noise), sin(2.0*PI*noise));
+    vec2 coord = vVertexTexCoords + SM_UW_PIXEL_OFFSET*noiseToDirection; 
     Color.rgb = texture2D(texFBColor, coord).rgb;
     gl_FragColor = Color;
 }
